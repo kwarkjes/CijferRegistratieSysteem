@@ -15,11 +15,25 @@ import java.sql.Statement;
  * @author Christian Kooiman
  */
 public class DatabaseConnection {
-    private Connection connection;
+    public Connection connection;
     private Statement statement;
+
+    public void setStatement(Statement statement) {
+        this.statement = statement;
+    }
+
     private boolean connectionEstablished = false;
+
+    public void setConnectionEstablished(boolean connectionEstablished) {
+        this.connectionEstablished = connectionEstablished;
+    }
+
+
     private DatabaseProperties databaseProperties = new DatabaseProperties();
    
+    public DatabaseConnection(){
+        openConnection();
+    }
     
     private void openConnection() {
         
@@ -35,7 +49,6 @@ public class DatabaseConnection {
 
         try {
             String url = "jdbc:" + databaseVendor + "://" + hostName + "/" + databaseName;
-            System.out.println("database url, user name, password: " + url + ", " + userName +", " + password);
             connection = DriverManager.getConnection(url, userName, password);
             statement = connection.createStatement();
             connectionEstablished = true;
@@ -56,6 +69,7 @@ public class DatabaseConnection {
         ResultSet resultSet = null;
         try {  
             resultSet = statement.executeQuery(queryText);
+            
         }
         catch(Exception e) {
               throw new RuntimeException("sql statement could not be executed: " + e);

@@ -29,7 +29,7 @@ public class DatabaseProperties {
 //             String currentDirectory = System.getProperty("user.dir");
 //             System.out.println("Current directory is: " + currentDirectory);
             
-            prop.load(new FileInputStream("build/classes/databaseConnection.properties"));
+            prop.load(new FileInputStream("databaseConnection.properties"));
             databaseVendor = prop.getProperty("databasevendor");
             hostName = prop.getProperty("hostname");
             databaseName = prop.getProperty("databasename");
